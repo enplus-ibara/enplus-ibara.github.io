@@ -767,8 +767,8 @@ export default function App() {
       <Header delay={skipIntro ? 0.4 : 2.6} />
       <main>
         <Hero ready={ready} />
-        <EventSection />
         <Story />
+        <EventSection />
         <Voices />
         <About />
         <PhotoBreak src="img/past_roses2.jpg">ただ出会うだけじゃなく<br />「来てよかった」と思える夜を</PhotoBreak>
