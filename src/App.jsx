@@ -641,6 +641,60 @@ function Gallery() {
   )
 }
 
+/* ---------- 最新情報は Instagram へ ---------- */
+function InstagramIcon({ size = 20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+const instaTiles = ['img/past_brulee2.jpg', 'img/s_cosmos.jpg', 'img/past_roses.jpg', 'img/s_cork.jpg', 'img/s_grape.jpg', 'img/s_orchid.jpg']
+
+function InstagramSection() {
+  return (
+    <section className="section insta" id="instagram">
+      <SectionTitle en="INSTAGRAM" ja="最新情報はInstagramから" />
+      <div className="insta-grid">
+        <Reveal className="insta-profile">
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="insta-ring" aria-label="en＋のInstagramを開く">
+            <Logo size={88} />
+          </a>
+          <p className="insta-id"><InstagramIcon size={16} />@enplus_ibara</p>
+          <p className="insta-name">en＋｜井原市マッチングイベント</p>
+          <p className="insta-text">
+            次回の開催のお知らせや申込状況、<br />
+            会場の雰囲気をいち早くお届けしています🌿
+          </p>
+          <a className="btn insta-btn" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+            <InstagramIcon size={18} />Instagramを見る
+          </a>
+        </Reveal>
+        <div className="insta-tiles">
+          {instaTiles.map((src, i) => (
+            <motion.a
+              key={src}
+              href={INSTAGRAM_URL} target="_blank" rel="noreferrer"
+              className="insta-tile"
+              aria-label="en＋のInstagramを開く"
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: i * 0.08, ease }}
+            >
+              <img src={`${BASE}${src}`} alt="" loading="lazy" />
+              <span className="insta-hover"><InstagramIcon size={28} /></span>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ---------- 参加者の声 ---------- */
 function Testimonials() {
   return (
@@ -774,6 +828,7 @@ export default function App() {
         <PhotoBreak src="img/past_roses2.jpg">ただ出会うだけじゃなく<br />「来てよかった」と思える夜を</PhotoBreak>
         <Flow />
         <Gallery />
+        <InstagramSection />
         <PhotoBreak src="img/s_orchid.jpg">ご縁から 次のご縁へ</PhotoBreak>
         <Faq />
         <Testimonials />
