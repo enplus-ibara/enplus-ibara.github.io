@@ -96,26 +96,89 @@ function Intro({ onDone }) {
 }
 
 /* ---------- ヘッダー ---------- */
-function Header() {
+const menuLinks = [
+  ['#event', '開催情報', 'EVENT'],
+  ['#about', 'en＋について', 'ABOUT'],
+  ['#flow', '当日の流れ', 'FLOW'],
+  ['#gallery', 'これまでの開催', 'GALLERY'],
+  ['#faq', 'よくある質問', 'Q&A'],
+  ['#organizer', '主催者の想い', 'MESSAGE'],
+]
+
+// スマホ用：右上の「≡」から開く、画面いっぱいのメニュー
+function MobileMenu({ open, onClose }) {
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="menu"
+          initial={{ clipPath: 'circle(0% at calc(100% - 40px) 34px)' }}
+          animate={{ clipPath: 'circle(150% at calc(100% - 40px) 34px)' }}
+          exit={{ clipPath: 'circle(0% at calc(100% - 40px) 34px)' }}
+          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+        >
+          <nav>
+            {menuLinks.map(([href, ja, en], i) => (
+              <motion.a
+                key={href} href={href} onClick={onClose}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 + i * 0.06, ease }}
+              >
+                <span>{en}</span>{ja}
+              </motion.a>
+            ))}
+          </nav>
+          <motion.div
+            className="menu-foot"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            <a className="btn btn-light" href={FORM_URL} target="_blank" rel="noreferrer">イベントに申し込む</a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram @enplus_ibara</a>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+function Header({ delay }) {
   const { scrollY } = useScroll()
   const [solid, setSolid] = useState(false)
+  const [open, setOpen] = useState(false)
   useMotionValueEvent(scrollY, 'change', (v) => setSolid(v > window.innerHeight * 0.6))
   return (
-    <motion.header
-      className={`header ${solid ? 'solid' : ''}`}
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 1, delay: 2.6, ease }}
-    >
-      <a href="#top" className="brand"><Logo size={40} /><span>en＋</span></a>
-      <nav>
-        <a href="#event">開催情報</a>
-        <a href="#about">en＋について</a>
-        <a href="#flow">当日の流れ</a>
-        <a href="#faq">よくある質問</a>
-      </nav>
-      <a className="btn btn-small" href={FORM_URL} target="_blank" rel="noreferrer">申し込む</a>
-    </motion.header>
+    <>
+      <MobileMenu open={open} onClose={() => setOpen(false)} />
+      <motion.header
+        className={`header ${solid ? 'solid' : ''} ${open ? 'menu-open' : ''}`}
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1, delay, ease }}
+      >
+        <a href="#top" className="brand" onClick={() => setOpen(false)}><Logo size={40} /><span>en＋</span></a>
+        <nav>
+          {menuLinks.slice(0, 5).map(([href, ja]) => <a key={href} href={href}>{ja}</a>)}
+        </nav>
+        <a className="btn btn-small" href={FORM_URL} target="_blank" rel="noreferrer">申し込む</a>
+        <button
+          className="burger"
+          aria-label={open ? 'メニューを閉じる' : 'メニューを開く'}
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          <motion.i animate={open ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }} transition={{ duration: 0.4, ease }} />
+          <motion.i animate={open ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }} transition={{ duration: 0.4, ease }} />
+        </button>
+      </motion.header>
+    </>
   )
 }
 
@@ -445,30 +508,37 @@ function About() {
 }
 
 /* ---------- 当日の流れ ---------- */
+// 写真付きのカードを横に並べる。スマホでは横にスワイプして見る
 function Flow() {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 75%', 'end 55%'] })
+  const { scrollXProgress } = useScroll({ container: ref })
   return (
     <section className="section flow" id="flow">
       <SectionTitle en="FLOW" ja="当日の流れ" />
-      <div className="timeline" ref={ref}>
-        <div className="line-track" />
-        <motion.div className="line" style={{ scaleY: scrollYProgress }} />
+      <div className="flow-track" ref={ref}>
         {flow.map((f, i) => (
-          <Reveal key={f.title} delay={0.05} className="step">
-            <motion.span
-              className="dot"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              viewport={{ once: true, amount: 1 }}
-              transition={{ duration: 0.6, ease }}
-            />
-            <p className="time">{f.time || '　'}</p>
-            <h3>{f.title}{f.tbd && <Tbd />}</h3>
-            <p>{f.text}</p>
-          </Reveal>
+          <motion.article
+            key={f.title}
+            className="flow-card"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.9, delay: i * 0.12, ease }}
+          >
+            <div className="flow-photo">
+              <img src={`${BASE}${f.photo}`} alt="" loading="lazy" />
+              <span className="flow-num">0{i + 1}</span>
+            </div>
+            <div className="flow-body">
+              <p className="time">{f.time || '　'}</p>
+              <h3>{f.title}{f.tbd && <Tbd />}</h3>
+              <p>{f.text}</p>
+            </div>
+          </motion.article>
         ))}
       </div>
+      <div className="flow-progress" aria-hidden><motion.i style={{ scaleX: scrollXProgress }} /></div>
+      <p className="flow-hint" aria-hidden>← スワイプして見る →</p>
       <p className="note">※流れは仮の内容です。決まり次第更新します。</p>
     </section>
   )
@@ -677,17 +747,29 @@ function StickyCta() {
   )
 }
 
+// 最初のロゴ演出は、はじめて開いたときだけ見せる
+const INTRO_KEY = 'enplus-intro-seen'
+function introSeen() {
+  try { return localStorage.getItem(INTRO_KEY) === '1' } catch { return false }
+}
+function markIntroSeen() {
+  try { localStorage.setItem(INTRO_KEY, '1') } catch { /* 保存できなくても表示には影響しない */ }
+}
+
 export default function App() {
-  const [ready, setReady] = useState(false)
+  const [skipIntro] = useState(introSeen)
+  const [ready, setReady] = useState(skipIntro)
   return (
     <MotionConfig reducedMotion="user">
-      <AnimatePresence>{!ready && <Intro key="intro" onDone={() => setReady(true)} />}</AnimatePresence>
-      <Header />
+      <AnimatePresence>
+        {!ready && <Intro key="intro" onDone={() => { markIntroSeen(); setReady(true) }} />}
+      </AnimatePresence>
+      <Header delay={skipIntro ? 0.4 : 2.6} />
       <main>
         <Hero ready={ready} />
+        <EventSection />
         <Story />
         <Voices />
-        <EventSection />
         <About />
         <PhotoBreak src="img/past_roses2.jpg">ただ出会うだけじゃなく<br />「来てよかった」と思える夜を</PhotoBreak>
         <Flow />

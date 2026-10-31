@@ -112,6 +112,7 @@ button { font: inherit; color: inherit; }
 }
 .header nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 .header .btn-small { margin-left: auto; }
+@media (max-width: 899px) { .header { gap: 10px; padding-right: 10px; } }
 .header.solid .btn-small { background: var(--navy); color: var(--cream); }
 .header:not(.solid) .btn-small { background: rgba(244,237,224,0.92); color: var(--navy); }
 @media (min-width: 900px) {
@@ -272,21 +273,57 @@ button { font: inherit; color: inherit; }
 .point h3 { font-size: 18px; color: var(--navy); margin: 6px 0 10px; }
 .point p { font-size: 14px; color: var(--muted); line-height: 1.9; }
 
-/* ---------- 当日の流れ ---------- */
-.flow { max-width: 720px; }
-.timeline { position: relative; padding-left: 44px; }
-.line-track, .line { position: absolute; left: 11px; top: 8px; bottom: 8px; width: 1px; }
-.line-track { background: var(--line); }
-.line { background: var(--gold); transform-origin: top; }
-.step { position: relative; padding-bottom: 48px; }
-.step:last-child { padding-bottom: 0; }
-.dot {
-  position: absolute; left: -38px; top: 8px; width: 11px; height: 11px; border-radius: 50%;
-  background: var(--paper); border: 1px solid var(--gold); box-shadow: 0 0 0 5px var(--paper);
+/* ---------- 当日の流れ（横に並ぶカード） ---------- */
+.flow-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 74%; gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 20px;
+  margin: 0 -20px; padding: 4px 20px 24px; scrollbar-width: none;
 }
+.flow-track::-webkit-scrollbar { display: none; }
+.flow-card {
+  scroll-snap-align: start; background: #fff; border-radius: 18px; overflow: hidden;
+  border: 1px solid var(--line); box-shadow: 0 24px 50px -36px rgba(19,27,46,0.45);
+}
+.flow-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.flow-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.22,1,.36,1); }
+.flow-card:hover .flow-photo img { transform: scale(1.06); }
+.flow-num {
+  position: absolute; left: 14px; bottom: 10px; font-family: var(--latin);
+  font-size: 34px; color: var(--cream); line-height: 1; text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+}
+.flow-body { padding: 20px 22px 26px; }
 .time { font-family: var(--latin); font-size: 22px; color: var(--gold); line-height: 1.4; }
-.step h3 { font-size: 20px; color: var(--navy); margin: 2px 0 6px; }
-.step p:last-child { font-size: 15px; color: var(--muted); }
+.flow-body h3 { font-size: 19px; color: var(--navy); margin: 2px 0 8px; }
+.flow-body p:last-child { font-size: 14px; color: var(--muted); line-height: 1.9; }
+.flow-progress { height: 2px; background: var(--line); border-radius: 2px; overflow: hidden; max-width: 200px; margin: 4px auto 0; }
+.flow-progress i { display: block; height: 100%; background: var(--gold); transform-origin: left; }
+.flow-hint { text-align: center; font-size: 11px; color: var(--muted); letter-spacing: 0.2em; margin-top: 10px; }
+@media (min-width: 900px) {
+  .flow-track { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 4px 0 24px; }
+  .flow-progress, .flow-hint { display: none; }
+}
+
+/* ---------- スマホ用メニュー ---------- */
+.burger {
+  display: grid; place-content: center; gap: 6px; width: 44px; height: 44px; margin-left: 4px;
+  background: none; border: 0; cursor: pointer; padding: 0;
+}
+.burger i { display: block; width: 22px; height: 1.5px; background: currentColor; border-radius: 2px; }
+.header.menu-open { color: var(--cream); background: transparent; box-shadow: none; backdrop-filter: none; }
+.header.menu-open .btn-small { opacity: 0; pointer-events: none; }
+@media (min-width: 900px) { .burger { display: none; } }
+.menu {
+  position: fixed; inset: 0; z-index: 45; background: var(--navy-deep); color: var(--cream);
+  display: flex; flex-direction: column; justify-content: center; padding: 90px 32px 40px; gap: 40px;
+}
+.menu nav { display: flex; flex-direction: column; gap: 6px; }
+.menu nav a {
+  text-decoration: none; font-family: var(--mincho); font-size: 22px; letter-spacing: 0.12em;
+  padding: 10px 0; border-bottom: 1px solid rgba(244,237,224,0.12); display: flex; align-items: baseline; gap: 16px;
+}
+.menu nav a span { font-family: var(--latin); font-size: 12px; letter-spacing: 0.3em; color: var(--gold); width: 6.5em; flex: none; }
+.menu-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; font-size: 13px; }
+.menu-foot a:not(.btn) { opacity: 0.75; }
 
 /* ---------- 会場の雰囲気 ---------- */
 .gallery { max-width: none; padding-left: 0; padding-right: 0; }

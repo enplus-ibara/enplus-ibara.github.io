@@ -31,10 +31,10 @@ export const events = [
 ]
 
 export const flow = [
-  { time: '19:00', title: '受付', text: '会場に着いたら、受付でお名前を伝えてくださいね。' },
-  { time: '19:30', title: 'スタート', text: '男女各10名の少人数で、ゆっくり始まります。' },
-  { time: '', title: '会話の時間', text: 'スタッフが自然に話せるきっかけをつくります。', tbd: true },
-  { time: '21:30', title: '終了', text: '「来てよかった」と思える夜になりますように。' },
+  { time: '19:00', title: '受付', text: '会場に着いたら、受付でお名前を伝えてくださいね。', photo: 'img/s_bell.jpg' },
+  { time: '19:30', title: 'スタート', text: '男女各10名の少人数で、ゆっくり始まります。', photo: 'img/s_cork.jpg' },
+  { time: '', title: '会話の時間', text: 'スタッフが自然に話せるきっかけをつくります。', tbd: true, photo: 'img/past_table.jpg' },
+  { time: '21:30', title: '終了', text: '「来てよかった」と思える夜になりますように。', photo: 'img/s_moon.jpg' },
 ]
 
 export const faqs = [
