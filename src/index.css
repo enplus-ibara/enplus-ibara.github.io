@@ -127,8 +127,7 @@ button { font: inherit; color: inherit; }
 .hero-bg { background: var(--navy-deep); }
 
 /* ---------- スクロールで場面が切り替わる ---------- */
-.story { position: relative; background: var(--navy-deep); }
-.story-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.story { position: relative; background: var(--navy-deep); height: 100svh; min-height: 520px; overflow: hidden; }
 .scene { position: absolute; inset: 0; }
 .scene img { width: 100%; height: 100%; object-fit: cover; }
 .scene::after {
@@ -146,11 +145,20 @@ button { font: inherit; color: inherit; }
   white-space: pre-line;
   background: rgba(19,27,46,0.28); backdrop-filter: blur(2px);
 }
-.story-progress {
-  position: absolute; left: 50%; bottom: 36px; width: 120px; height: 1px;
-  transform: translateX(-50%); background: rgba(244,237,224,0.25); z-index: 2;
+.story-dots {
+  position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%); z-index: 2;
+  display: flex; gap: 10px;
 }
-.story-progress i { display: block; height: 100%; background: var(--cream); transform-origin: left; }
+@media (min-width: 900px) { .story-dots { bottom: 40px; } }
+.story-dots button {
+  width: 36px; height: 14px; padding: 6px 0; border: 0; background: none; cursor: pointer; position: relative;
+}
+.story-dots button::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: rgba(244,237,224,0.3);
+}
+.story-dots i {
+  position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: var(--cream); transform-origin: left;
+}
 
 /* ---------- 写真の帯 ---------- */
 .photo-break { position: relative; height: 70svh; min-height: 420px; overflow: hidden; display: grid; place-items: center; }

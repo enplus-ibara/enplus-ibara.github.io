@@ -70,11 +70,10 @@ export const heroSlides = [
   { src: 'img/past_dessert.jpg', alt: 'キャンドルの灯るデザートの卓' },
 ]
 
-// スクロールに合わせて切り替わる場面
+// トップの下で、写真と言葉が自動で切り替わる場面（1画面分）
 export const scenes = [
-  { src: 'img/s_moon.jpg', text: '仕事と家を往復する毎日' },
-  { src: 'img/past_dessert.jpg', text: '新しい出会いって なかなかない' },
-  { src: 'img/past_roses2.jpg', text: 'だからこそ ゆっくり話せる夜を' },
+  { src: 'img/past_dessert.jpg', text: '仕事と家を往復する毎日\n新しい出会いって なかなかない' },
+  { src: 'img/past_roses2.jpg', text: 'だからこそ\nゆっくり話せる夜を' },
   { src: 'img/past_brulee.jpg', text: 'その一歩が\n素敵なご縁につながりますように' },
 ]
 

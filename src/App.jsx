@@ -219,50 +219,62 @@ function Hero({ ready }) {
   )
 }
 
-/* ---------- スクロールで場面が切り替わる ---------- */
-function Scene({ scene, i, total, progress }) {
-  const step = 1 / total
-  const start = i * step
-  const end = start + step
-  const first = i === 0
-  const last = i === total - 1
-  // 場面の前後で、ふわっと重なるように入れ替わる（値は 0〜1 の範囲に収める）
-  const from = Math.max(0, start - step * 0.25)
-  const to = Math.min(1, end + step * 0.1)
-  const opacity = useTransform(
-    progress,
-    [from, start + step * 0.15, end - step * 0.15, to],
-    [first ? 1 : 0, 1, 1, last ? 1 : 0],
-  )
-  const scale = useTransform(progress, [from, to], [1.18, 1.0])
-  const textOpacity = useTransform(
-    progress,
-    [start + step * 0.05, start + step * 0.25, end - step * 0.25, end - step * 0.05],
-    [first ? 1 : 0, 1, 1, last ? 1 : 0],
-  )
-  const textY = useTransform(progress, [start, end], [30, -30])
-  const blur = useTransform(textOpacity, [0, 1], ['blur(10px)', 'blur(0px)'])
-  return (
-    <motion.div className="scene" style={{ opacity }}>
-      <motion.img src={`${BASE}${scene.src}`} alt="" style={{ scale }} />
-      <motion.p className="scene-text" style={{ opacity: textOpacity, y: textY, filter: blur }}>
-        <span>{scene.text}</span>
-      </motion.p>
-    </motion.div>
-  )
-}
+/* ---------- 写真と言葉が自動で切り替わる（1画面分） ---------- */
+const SCENE_MS = 4200
 
 function Story() {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  const bar = useTransform(scrollYProgress, [0, 1], [0, 1])
+  // 画面に入っているあいだだけ切り替える
+  const inView = useInView(ref, { amount: 0.5 })
+  const [i, setI] = useState(0)
+  useEffect(() => {
+    if (!inView) return
+    const t = setTimeout(() => setI((n) => (n + 1) % scenes.length), SCENE_MS)
+    return () => clearTimeout(t)
+  }, [inView, i])
+  const s = scenes[i]
   return (
-    <section className="story" ref={ref} style={{ height: `${scenes.length * 100}svh` }}>
-      <div className="story-sticky">
-        {scenes.map((s, i) => (
-          <Scene key={s.src} scene={s} i={i} total={scenes.length} progress={scrollYProgress} />
+    <section className="story" ref={ref}>
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={s.src}
+          className="scene"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.4, ease: 'easeInOut' }}
+        >
+          <motion.img
+            src={`${BASE}${s.src}`} alt=""
+            initial={{ scale: 1.14 }}
+            animate={{ scale: 1.02 }}
+            transition={{ duration: SCENE_MS / 1000 + 1.4, ease: 'linear' }}
+          />
+          <motion.p
+            className="scene-text"
+            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, y: -12, filter: 'blur(6px)' }}
+            transition={{ duration: 1, delay: 0.3, ease }}
+          >
+            <span>{s.text}</span>
+          </motion.p>
+        </motion.div>
+      </AnimatePresence>
+      {/* 今どの場面かを示す点。押すとその場面に切り替わる */}
+      <div className="story-dots">
+        {scenes.map((sc, n) => (
+          <button key={sc.src} aria-label={`場面${n + 1}`} className={n === i ? 'on' : ''} onClick={() => setI(n)}>
+            {n === i && inView && (
+              <motion.i
+                key={i}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: SCENE_MS / 1000, ease: 'linear' }}
+              />
+            )}
+          </button>
         ))}
-        <div className="story-progress"><motion.i style={{ scaleX: bar }} /></div>
       </div>
     </section>
   )
