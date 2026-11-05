@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://enplus-ibara.github.io/sitemap.xml
