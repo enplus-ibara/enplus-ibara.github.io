@@ -102,7 +102,7 @@ const menuLinks = [
   ['#flow', '当日の流れ', 'FLOW'],
   ['#gallery', 'これまでの開催', 'GALLERY'],
   ['#faq', 'よくある質問', 'Q&A'],
-  ['#organizer', '主催者の想い', 'MESSAGE'],
+  ['#organizer', '私たちの想い', 'MESSAGE'],
 ]
 
 // スマホ用：右上の「≡」から開く、画面いっぱいのメニュー
@@ -715,7 +715,7 @@ function Organizer() {
   const drift = useTransform(scrollYProgress, [0, 1], ['-3%', '3%'])
   return (
     <section className="section organizer" id="organizer">
-      <SectionTitle en="MESSAGE" ja="主催者の想い" />
+      <SectionTitle en="MESSAGE" ja="私たちの想い" />
       {/* 切り抜かれた要素は画面に入ったと判定されないので、外側の枠で判定する */}
       <motion.div
         className="org-visual"
