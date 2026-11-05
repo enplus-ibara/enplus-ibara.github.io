@@ -57,11 +57,6 @@ button { font: inherit; color: inherit; }
 .btn-light { background: var(--cream); color: var(--navy); }
 .btn-small { padding: 9px 22px; font-size: 13px; }
 
-.tbd {
-  display: inline-block; margin-left: 8px; padding: 0 8px;
-  font-size: 11px; line-height: 1.8; border-radius: 4px;
-  background: #e8d9b5; color: #6b5420; font-family: var(--gothic); vertical-align: middle;
-}
 .note { font-size: 12px; color: var(--muted); margin-top: 28px; }
 .note.center { text-align: center; }
 .small { font-size: 14px; color: var(--muted); }

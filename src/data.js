@@ -1,5 +1,4 @@
 // 開催ごとに書き換える情報はこのファイルにまとめる
-// tbd: true の項目は「確認中」として表示される
 
 export const FORM_URL = 'https://forms.gle/PetGbwoC6q365rDm8'
 export const INSTAGRAM_URL = 'https://www.instagram.com/enplus_ibara/'
@@ -10,7 +9,7 @@ export const events = [
     label: 'NEXT EVENT',
     date: '2026.11.14',
     week: 'SAT',
-    photo: 'img/s_bellcosmos.jpg',
+    photo: 'img/n_sign.jpg',
     rows: [
       { icon: '🕢', name: '時間', value: '19:30〜21:30（受付 19:00〜）' },
       { icon: '📍', name: '会場', value: 'umozon（night cafe & bar）貸切', sub: '岡山県井原市井原町318-1 石井ビル102号' },
@@ -24,17 +23,17 @@ export const events = [
     label: 'COMING SOON',
     date: '2026.12.12',
     week: 'SAT',
-    photo: 'img/s_cork.jpg',
-    rows: [{ icon: '🌿', name: '詳細', value: '近日公開します', tbd: true }],
+    photo: 'img/n_champagne.jpg',
+    rows: [{ icon: '🌿', name: '詳細', value: '近日公開します' }],
     open: false,
   },
 ]
 
 export const flow = [
   { time: '19:00', title: '受付', text: '会場に着いたら、受付でお名前を伝えてくださいね。', photo: 'img/s_bell.jpg' },
-  { time: '19:30', title: 'スタート', text: '男女各10名の少人数で、ゆっくり始まります。', photo: 'img/s_cork.jpg' },
-  { time: '', title: '会話の時間', text: 'スタッフが自然に話せるきっかけをつくります。', tbd: true, photo: 'img/past_table.jpg' },
-  { time: '21:30', title: '終了', text: '「来てよかった」と思える夜になりますように。', photo: 'img/s_moon.jpg' },
+  { time: '19:30', title: 'スタート', text: '男女各10名の少人数で、ゆっくり始まります。', photo: 'img/toast.jpg' },
+  { time: '', title: '会話の時間', text: 'スタッフが自然に話せるきっかけをつくります。', photo: 'img/n_green_table.jpg' },
+  { time: '21:30', title: '終了', text: '「来てよかった」と思える夜になりますように。', photo: 'img/n_moon_low.jpg' },
 ]
 
 export const faqs = [
@@ -60,7 +59,7 @@ export const faqs = [
   },
 ]
 
-// 写真はすべて人の顔が写っていない場面だけを使う
+// 写真はすべて人の顔が写っていない場面だけを使う。同じ写真をページ内で使い回さない
 // トップで切り替わる写真
 export const heroSlides = [
   { src: 'img/past_roses.jpg', alt: 'バラとキャンドルを飾ったテーブル' },
@@ -72,42 +71,38 @@ export const heroSlides = [
 
 // トップの下で、写真と言葉が自動で切り替わる場面（1画面分）
 export const scenes = [
-  { src: 'img/past_dessert.jpg', text: '仕事と家を往復する毎日\n新しい出会いって なかなかない' },
-  { src: 'img/past_roses2.jpg', text: 'だからこそ\nゆっくり話せる夜を' },
-  { src: 'img/past_brulee.jpg', text: 'その一歩が\n素敵なご縁につながりますように' },
+  { src: 'img/n_moon_monstera.jpg', text: '仕事と家を往復する毎日\n新しい出会いって なかなかない' },
+  { src: 'img/n_sofa.jpg', text: 'だからこそ\nゆっくり話せる夜を' },
+  { src: 'img/n_moon_hand.jpg', text: 'その一歩が\n素敵なご縁につながりますように' },
 ]
 
 // 1段目：これまでの開催（umozon 以外の会場）／2・3段目：umozon
 export const gallery = [
-  { src: 'img/past_roses.jpg', alt: 'バラとキャンドルを飾ったテーブル' },
+  { src: 'img/past_bouquet.jpg', alt: 'バラの花とキャンドルを飾ったテーブル' },
+  { src: 'img/past_torch.jpg', alt: 'タルトとケーキが並ぶデザートの卓' },
   { src: 'img/past_brulee.jpg', alt: '炎をまとったクレームブリュレ' },
-  { src: 'img/past_table.jpg', alt: '白いテーブルとバラの花びら' },
-  { src: 'img/past_dessert.jpg', alt: 'キャンドルの灯るデザートの卓' },
-  { src: 'img/past_brulee2.jpg', alt: '仕上げのクレームブリュレ' },
-  { src: 'img/past_roses2.jpg', alt: 'キャンドルとバラ' },
-  { src: 'img/past_brulee3.jpg', alt: '並んだクレームブリュレ' },
+  { src: 'img/past_olive.jpg', alt: '白い壁とオリーブの枝' },
+  { src: 'img/past_cake.jpg', alt: 'キャンドルの灯るケーキの卓' },
 ]
 
 export const galleryUmozon = [
-  { src: 'img/s_cosmos.jpg', alt: 'コスモスの一輪挿し' },
-  { src: 'img/s_orchid.jpg', alt: '胡蝶蘭' },
-  { src: 'img/s_cork.jpg', alt: 'シャンパンのコルク' },
-  { src: 'img/s_bell.jpg', alt: '卓上ベル' },
-  { src: 'img/s_monstera.jpg', alt: 'モンステラの卓上飾り' },
+  { src: 'img/n_bar_wide.jpg', alt: 'カウンターと酒棚' },
+  { src: 'img/n_cosmos_bouquet.jpg', alt: 'コスモスの花束' },
+  { src: 'img/n_tree_tables.jpg', alt: '店内の木とテーブル席' },
   { src: 'img/s_greenart.jpg', alt: '壁のグリーンのアート' },
-  { src: 'img/s_pumpkin.jpg', alt: 'ボトルとかぼちゃ' },
+  { src: 'img/n_moon_bottles.jpg', alt: '月のライトと色とりどりのボトル' },
+  { src: 'img/s_monstera.jpg', alt: 'モンステラの卓上飾り' },
+  { src: 'img/n_shelf_table.jpg', alt: '棚と木のテーブル' },
   { src: 'img/s_pinecone.jpg', alt: '松ぼっくり' },
-  { src: 'img/s_moon.jpg', alt: '月のようなライト' },
-  { src: 'img/s_tree.jpg', alt: '店内の木' },
 ]
 
 export const galleryFood = [
+  { src: 'img/n_pasta_light.jpg', alt: 'スポットライトの下のパスタ' },
   { src: 'img/s_grape.jpg', alt: 'ぶどうのサンドケーキ' },
-  { src: 'img/s_showcase.jpg', alt: 'ショーケースのケーキ' },
-  { src: 'img/s_pasta.jpg', alt: 'トマトパスタ' },
+  { src: 'img/n_dessert_coffee.jpg', alt: 'コーヒーと焼き菓子のプレート' },
+  { src: 'img/n_smoke.jpg', alt: 'グラスに閉じ込める燻製の仕上げ' },
+  { src: 'img/n_pudding_cup.jpg', alt: 'プリンとティーカップ' },
   { src: 'img/s_beer.jpg', alt: '生ビール' },
   { src: 'img/s_canele.jpg', alt: 'カヌレとケーキ' },
-  { src: 'img/cake.jpg', alt: 'ショーケースに並ぶケーキ' },
-  { src: 'img/pudding.jpg', alt: 'プリン' },
-  { src: 'img/toast.jpg', alt: 'ビールで乾杯' },
+  { src: 'img/n_cake_row.jpg', alt: 'ショーケースに並ぶケーキ' },
 ]

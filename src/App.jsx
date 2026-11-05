@@ -33,10 +33,6 @@ function Reveal({ children, delay = 0, y = 28, className, as = 'div' }) {
   )
 }
 
-function Tbd() {
-  return <span className="tbd">仮</span>
-}
-
 function SectionTitle({ en, ja }) {
   return (
     <div className="section-title">
@@ -413,7 +409,7 @@ function EventSection() {
                 >
                   <dt><span aria-hidden>{r.icon}</span>{r.name}</dt>
                   <dd>
-                    {r.value}{r.tbd && <Tbd />}
+                    {r.value}
                     {r.sub && <small>{r.sub}</small>}
                   </dd>
                 </motion.div>
@@ -471,14 +467,14 @@ function About() {
           transition={{ duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.img
-            src={`${BASE}img/past_roses.jpg`} alt="バラとキャンドルを飾ったテーブル"
+            src={`${BASE}img/n_tree_bar.jpg`} alt="店内の木とカウンター"
             variants={{ hidden: { scale: 1.25 }, show: { scale: 1 } }}
             transition={{ duration: 2.2, ease }}
           />
         </motion.div>
         {/* 奥行きが出るように、小さな写真を違う速さで動かす */}
         <motion.img className="float float-a" src={`${BASE}img/s_cosmos2.jpg`} alt="" style={{ y: floatA }} />
-        <motion.img className="float float-b" src={`${BASE}img/past_brulee3.jpg`} alt="" style={{ y: floatB }} />
+        <motion.img className="float float-b" src={`${BASE}img/n_madeleine.jpg`} alt="" style={{ y: floatB }} />
         </motion.div>
         <div className="about-text">
           <Reveal as="p" className="lead">
@@ -531,7 +527,7 @@ function Flow() {
             </div>
             <div className="flow-body">
               <p className="time">{f.time || '　'}</p>
-              <h3>{f.title}{f.tbd && <Tbd />}</h3>
+              <h3>{f.title}</h3>
               <p>{f.text}</p>
             </div>
           </motion.article>
@@ -539,7 +535,6 @@ function Flow() {
       </div>
       <div className="flow-progress" aria-hidden><motion.i style={{ scaleX: scrollXProgress }} /></div>
       <p className="flow-hint" aria-hidden>← スワイプして見る →</p>
-      <p className="note">※流れは仮の内容です。決まり次第更新します。</p>
     </section>
   )
 }
@@ -652,7 +647,7 @@ function InstagramIcon({ size = 20 }) {
   )
 }
 
-const instaTiles = ['img/past_brulee2.jpg', 'img/s_cosmos.jpg', 'img/past_roses.jpg', 'img/s_cork.jpg', 'img/s_grape.jpg', 'img/s_orchid.jpg']
+const instaTiles = ['img/n_pasta_moon.jpg', 'img/n_cosmos_bell.jpg', 'img/n_green_hang.jpg', 'img/n_cheesecake.jpg', 'img/s_pumpkin.jpg', 'img/s_cork.jpg']
 
 function InstagramSection() {
   return (
@@ -852,11 +847,11 @@ export default function App() {
         <EventSection />
         <Voices />
         <About />
-        <PhotoBreak src="img/past_roses2.jpg">ただ出会うだけじゃなく<br />「来てよかった」と思える夜を</PhotoBreak>
+        <PhotoBreak src="img/n_bar_night.jpg">ただ出会うだけじゃなく<br />「来てよかった」と思える夜を</PhotoBreak>
         <Flow />
         <Gallery />
         <InstagramSection />
-        <PhotoBreak src="img/s_orchid.jpg">ご縁から 次のご縁へ</PhotoBreak>
+        <PhotoBreak src="img/n_tree_up.jpg">ご縁から 次のご縁へ</PhotoBreak>
         <Faq />
         <Testimonials />
         <Organizer />
