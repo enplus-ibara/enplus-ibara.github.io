@@ -710,27 +710,54 @@ function Testimonials() {
 
 /* ---------- 主催者の想い ---------- */
 function Organizer() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const drift = useTransform(scrollYProgress, [0, 1], ['-3%', '3%'])
   return (
     <section className="section organizer" id="organizer">
       <SectionTitle en="MESSAGE" ja="主催者の想い" />
-      <div className="organizer-grid">
-        <Reveal className="org-photo">
-          <div className="org-placeholder"><Logo size={96} /><p>写真（準備中）</p></div>
+      {/* 切り抜かれた要素は画面に入ったと判定されないので、外側の枠で判定する */}
+      <motion.div
+        className="org-visual"
+        ref={ref}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <motion.span
+          className="org-frame"
+          variants={{ hidden: { opacity: 0, x: -14, y: -14 }, show: { opacity: 1, x: 0, y: 0 } }}
+          transition={{ duration: 1.4, delay: 0.7, ease }}
+        />
+        <motion.div
+          className="org-art"
+          variants={{ hidden: { clipPath: 'inset(0 100% 0 0)' }, show: { clipPath: 'inset(0 0% 0 0)' } }}
+          transition={{ duration: 1.6, ease: [0.76, 0, 0.24, 1] }}
+        >
+          <motion.img
+            src={`${BASE}img/staff.jpg`} alt="en＋のスタッフ3人のイラスト"
+            style={{ y: drift }}
+            variants={{ hidden: { scale: 1.14 }, show: { scale: 1.06 } }}
+            transition={{ duration: 2.6, ease }}
+          />
+        </motion.div>
+      </motion.div>
+      <div className="org-body">
+        <Reveal className="org-sign">
+          <span>Our Team</span>
+          <p>en＋ スタッフ一同</p>
         </Reveal>
-        <div>
-          <Reveal as="p" className="worry">「どうしたら、自然に話せるかな？」</Reveal>
-          <Reveal as="p" className="worry" delay={0.15}>「今回は、何をしたら楽しいかな？」</Reveal>
-          <Reveal as="p" delay={0.3}>
-            スタッフで話し合いながら、ひとつひとつ考えています。
-          </Reveal>
-          <Reveal as="p" delay={0.4}>
+        <Reveal className="org-card" y={40}>
+          <p className="worry">「どうしたら、自然に話せるかな？」</p>
+          <p className="worry">「今回は、何をしたら楽しいかな？」</p>
+          <p>スタッフで話し合いながら、<br className="sp-only" />ひとつひとつ考えています。</p>
+          <p>
             もちろん、新しいご縁につながってほしい。<br />
             でも、ただ出会うだけじゃなくて、<br />
-            「来てよかった」と思える、あたたかい場にしたい。
-          </Reveal>
-          <Reveal as="p" delay={0.5}>ご縁から、次のご縁へ。</Reveal>
-          <Reveal as="p" className="sign" delay={0.6}>en＋ 主催者（お名前・紹介文は準備中）<Tbd /></Reveal>
-        </div>
+            「来てよかった」と思える、<br className="sp-only" />あたたかい場にしたい。
+          </p>
+          <p className="org-last">ご縁から、次のご縁へ。</p>
+        </Reveal>
       </div>
     </section>
   )
