@@ -21,4 +21,4 @@ try {
 } finally {
   Pop-Location
 }
-Write-Host '公開しました：https://raindog2000-star.github.io/enplus/'
+Write-Host '公開しました：https://enplus-ibara.github.io/'
