@@ -478,3 +478,5 @@ button { font: inherit; color: inherit; }
   .plus-char, .insta-ring::before { animation: none; }
   .marquee { overflow-x: auto; }
 }
+
+.ev-note { margin-top: 20px; font-size: 0.9rem; line-height: 1.9; color: var(--navy, #1f2d4d); opacity: 0.85; }

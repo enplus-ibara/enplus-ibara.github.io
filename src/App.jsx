@@ -18,6 +18,14 @@ const BASE = import.meta.env.BASE_URL
 const ease = [0.22, 1, 0.36, 1]
 
 // スクロールで見えたときに、ぼかしが解けながら浮かび上がる
+// 申込受付中の回があればフォームへ、なければ「次回のイベント」欄へ案内する
+const applyEvent = events.find((e) => e.apply)
+const nextEvent = events[0]
+const ApplyLink = ({ className, label, onClick }) =>
+  applyEvent
+    ? <a className={className} href={FORM_URL} target="_blank" rel="noreferrer">{label}</a>
+    : <a className={className} href="#event" onClick={onClick}>次回のイベントを見る</a>
+
 function Reveal({ children, delay = 0, y = 28, className, as = 'div' }) {
   const Tag = motion[as]
   return (
@@ -136,7 +144,7 @@ function MobileMenu({ open, onClose }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}
           >
-            <a className="btn btn-light" href={FORM_URL} target="_blank" rel="noreferrer">イベントに申し込む</a>
+            <ApplyLink className="btn btn-light" label="イベントに申し込む" onClick={onClose} />
             <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram @enplus_ibara</a>
           </motion.div>
         </motion.div>
@@ -163,7 +171,9 @@ function Header({ delay }) {
         <nav>
           {menuLinks.slice(0, 5).map(([href, ja]) => <a key={href} href={href}>{ja}</a>)}
         </nav>
-        <a className="btn btn-small" href={FORM_URL} target="_blank" rel="noreferrer">申し込む</a>
+        {applyEvent
+          ? <a className="btn btn-small" href={FORM_URL} target="_blank" rel="noreferrer">申し込む</a>
+          : <a className="btn btn-small" href="#event" onClick={() => setOpen(false)}>次回の案内</a>}
         <button
           className="burger"
           aria-label={open ? 'メニューを閉じる' : 'メニューを開く'}
@@ -415,8 +425,9 @@ function EventSection() {
                 </motion.div>
               ))}
             </dl>
-            {ev.open && (
-              <a className="btn" href={FORM_URL} target="_blank" rel="noreferrer">この回に申し込む</a>
+            {ev.open && (ev.apply
+              ? <a className="btn" href={FORM_URL} target="_blank" rel="noreferrer">この回に申し込む</a>
+              : <p className="ev-note">お申し込みは近日受付開始です。<br />開始のお知らせは Instagram でお届けします。</p>
             )}
           </motion.article>
         ))}
@@ -482,11 +493,11 @@ function About() {
           </Reveal>
           <Reveal as="p" delay={0.15}>
             en＋（エンプラス）は、岡山県井原市で開いている少人数制のマッチングイベントです。
-            前身の「井原エグゼクティブマッチング」から数えて、これまでに8回開催してきました。
+            前身の「井原エグゼクティブマッチング」から数えて、これまでに9回開催してきました。
           </Reveal>
           <div className="stats">
-            <Reveal delay={0.2}><Count to={90} suffix="名以上" /><p>累計の参加者</p></Reveal>
-            <Reveal delay={0.35}><Count to={8} suffix="回" /><p>これまでの開催</p></Reveal>
+            <Reveal delay={0.2}><Count to={100} suffix="名以上" /><p>累計の参加者</p></Reveal>
+            <Reveal delay={0.35}><Count to={9} suffix="回" /><p>これまでの開催</p></Reveal>
           </div>
         </div>
       </div>
@@ -581,7 +592,7 @@ function Gallery() {
   const [active, setActive] = useState(null)
   const rows = [
     { items: gallery, label: '前身「井原エグゼクティブマッチング」の開催より', place: 'お花屋さん「プリムヴェール」2階のシェアスペース' },
-    { items: galleryUmozon, label: '11/14の会場', place: 'umozon（night cafe & bar）' },
+    { items: galleryUmozon, label: '11/14・12/12の会場', place: 'umozon（night cafe & bar）' },
     { items: galleryFood },
   ]
   return (
@@ -774,7 +785,7 @@ function Closing() {
       <div className="closing-inner">
         <Reveal as="p" className="closing-copy">動いた人から、<br />出会いは始まる。</Reveal>
         <Reveal delay={0.3}>
-          <a className="btn btn-light" href={FORM_URL} target="_blank" rel="noreferrer">イベントに申し込む</a>
+          <ApplyLink className="btn btn-light" label="イベントに申し込む" />
         </Reveal>
         <Reveal delay={0.45} className="contact">
           <p>わからないことは、お気軽にどうぞ</p>
@@ -810,13 +821,13 @@ function StickyCta() {
       {show && (
         <motion.a
           className="sticky-cta"
-          href={FORM_URL} target="_blank" rel="noreferrer"
+          {...(applyEvent ? { href: FORM_URL, target: '_blank', rel: 'noreferrer' } : { href: '#event' })}
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.6, ease }}
         >
-          <span>11/14（土）umozon</span>申し込む
+          <span>{(applyEvent || nextEvent).date.slice(5).replace('.', '/').replace(/^0/, '')}（土）umozon</span>{applyEvent ? '申し込む' : '詳しく見る'}
         </motion.a>
       )}
     </AnimatePresence>
