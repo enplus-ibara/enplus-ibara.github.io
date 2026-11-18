@@ -13,7 +13,7 @@ export const events = [
     photo: 'img/n_champagne.jpg',
     rows: [
       { icon: '🕢', name: '時間', value: '19:30〜21:30（受付 19:00〜）' },
-      { icon: '📍', name: '会場', value: 'umozon（night cafe & bar）', sub: '岡山県井原市井原町318-1 石井ビル102号' },
+      { icon: '📍', name: '会場', value: 'umozon（night cafe & bar）貸切', sub: '岡山県井原市井原町318-1 石井ビル102号' },
       { icon: '👫', name: '対象年齢', value: '30〜50歳' },
       { icon: '👥', name: '定員', value: '男性10名・女性10名' },
       { icon: '💰', name: '参加費', value: '近日お知らせします' },
