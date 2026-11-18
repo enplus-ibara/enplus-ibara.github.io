@@ -1,6 +1,6 @@
 // 開催ごとに書き換える情報はこのファイルにまとめる
 
-export const FORM_URL = 'https://forms.gle/PetGbwoC6q365rDm8'
+export const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeuiWt7XgTjw5qniEAJbC4dTj8PVMxAwwcf-z76WmR0hisgvg/viewform'
 export const INSTAGRAM_URL = 'https://www.instagram.com/enplus_ibara/'
 export const DM_URL = 'https://ig.me/m/enplus_ibara'
 
@@ -14,12 +14,12 @@ export const events = [
     rows: [
       { icon: '🕢', name: '時間', value: '19:30〜21:30（受付 19:00〜）' },
       { icon: '📍', name: '会場', value: 'umozon（night cafe & bar）貸切', sub: '岡山県井原市井原町318-1 石井ビル102号' },
-      { icon: '👫', name: '対象年齢', value: '30〜50歳' },
+      { icon: '👫', name: '対象年齢', value: '男女とも30〜50歳' },
       { icon: '👥', name: '定員', value: '男性10名・女性10名' },
       { icon: '💰', name: '参加費', value: '男性6,000円／女性5,000円', sub: 'お支払いは現金のみです' },
     ],
     open: true,
-    apply: false,
+    apply: true,
   },
 ]
 
