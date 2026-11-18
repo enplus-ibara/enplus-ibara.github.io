@@ -16,7 +16,7 @@ export const events = [
       { icon: '📍', name: '会場', value: 'umozon（night cafe & bar）貸切', sub: '岡山県井原市井原町318-1 石井ビル102号' },
       { icon: '👫', name: '対象年齢', value: '30〜50歳' },
       { icon: '👥', name: '定員', value: '男性10名・女性10名' },
-      { icon: '💰', name: '参加費', value: '近日お知らせします' },
+      { icon: '💰', name: '参加費', value: '男性6,000円／女性5,000円', sub: 'お支払いは現金のみです' },
     ],
     open: true,
     apply: false,
