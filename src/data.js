@@ -41,12 +41,20 @@ export const events = [
   },
 ]
 
+// 当日の流れ（2026-11-26 運営のチラシ画像〔受付→自己紹介・交流→ケーキ→席替え→マッチング〕に合わせた）
 export const flow = [
-  { time: '19:00', title: '受付', text: '会場に着いたら、受付でお名前を伝えてくださいね。', photo: 'img/s_bell.jpg' },
-  { time: '19:30', title: 'スタート', text: '男女各10名の少人数で、ゆっくり始まります。', photo: 'img/toast.jpg' },
-  { time: '', title: '会話の時間', text: 'スタッフが自然に話せるきっかけをつくります。', photo: 'img/n_green_table.jpg' },
-  { time: '21:30', title: '終了', text: '「来てよかった」と思える夜になりますように。', photo: 'img/n_moon_low.jpg' },
+  { time: '19:00', title: '受付', text: 'プロフィールカードにご記入いただきます。会話のきっかけになるカードです。', photo: 'img/s_bell.jpg' },
+  { time: '19:30', title: '自己紹介・交流タイム', text: 'まずは自己紹介から。スタッフが自然に話せるきっかけをつくります。', photo: 'img/toast.jpg' },
+  { time: '', title: 'ケーキを楽しみながら会話', text: 'ケーキを味わいながら、肩の力を抜いておしゃべりを。', photo: 'img/n_cake_up.jpg' },
+  { time: '', title: '席替え・交流タイム', text: '席替えをして、いろいろな方とゆっくりお話しできます。', photo: 'img/n_green_table.jpg' },
+  { time: '〜21:30', title: 'マッチングタイム', text: '「来てよかった」と思える夜になりますように。', photo: 'img/n_moon_low.jpg' },
 ]
+
+// 当日の流れの下に出す「プロフィールカード」の案内
+export const profileCard = {
+  title: 'プロフィールカードを使用します',
+  points: ['会話のきっかけが見つかる', '共通の話題で自然に話せる', '初めての方も安心して参加できます'],
+}
 
 export const faqs = [
   {

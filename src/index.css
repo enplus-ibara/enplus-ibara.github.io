@@ -294,7 +294,7 @@ button { font: inherit; color: inherit; }
 .flow-progress i { display: block; height: 100%; background: var(--gold); transform-origin: left; }
 .flow-hint { text-align: center; font-size: 11px; color: var(--muted); letter-spacing: 0.2em; margin-top: 10px; }
 @media (min-width: 900px) {
-  .flow-track { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; margin: 0; padding: 4px 0 24px; }
+  .flow-track { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); overflow: visible; margin: 0; padding: 4px 0 24px; }
   .flow-progress, .flow-hint { display: none; }
 }
 
@@ -484,3 +484,13 @@ button { font: inherit; color: inherit; }
 /* 開催情報：補足の一文（占いなど）と、改行を含む値 */
 .ev-lead { margin: -8px 0 24px; font-size: 0.92rem; line-height: 1.9; color: var(--navy); white-space: pre-line; }
 .ev-row dd { white-space: pre-line; }
+
+/* 当日の流れ：プロフィールカードの案内 */
+.profile-card {
+  max-width: 560px; margin: 36px auto 0; padding: 26px 28px; background: #fff;
+  border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 50px -36px rgba(19,27,46,0.45);
+}
+.profile-card-title { text-align: center; color: var(--navy); font-size: 17px; letter-spacing: 0.08em; margin-bottom: 14px; }
+.profile-card ul { list-style: none; margin: 0 auto; padding: 0; width: fit-content; }
+.profile-card li { position: relative; padding: 6px 0 6px 28px; font-size: 15px; line-height: 1.8; }
+.profile-card li::before { content: '✓'; position: absolute; left: 4px; top: 6px; color: var(--gold); font-weight: 600; }

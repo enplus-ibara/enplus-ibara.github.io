@@ -10,7 +10,7 @@ import {
   animate,
 } from 'motion/react'
 import {
-  FORM_URL, INSTAGRAM_URL, DM_URL, events, flow, faqs,
+  FORM_URL, INSTAGRAM_URL, DM_URL, events, flow, profileCard, faqs,
   heroSlides, scenes, gallery, galleryUmozon, galleryFood,
 } from './data'
 
@@ -549,6 +549,12 @@ function Flow() {
       </div>
       <div className="flow-progress" aria-hidden><motion.i style={{ scaleX: scrollXProgress }} /></div>
       <p className="flow-hint" aria-hidden>← スワイプして見る →</p>
+      <Reveal className="profile-card">
+        <p className="profile-card-title">{profileCard.title}</p>
+        <ul>
+          {profileCard.points.map((p) => <li key={p}>{p}</li>)}
+        </ul>
+      </Reveal>
     </section>
   )
 }
