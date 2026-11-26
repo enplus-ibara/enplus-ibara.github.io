@@ -5,6 +5,7 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/enplus_ibara/'
 export const DM_URL = 'https://ig.me/m/enplus_ibara'
 
 // open: 詳しい情報を載せる／apply: 申込受付中（false の間は申込ボタンを出さず「近日受付開始」と表示）
+// formUrl がある回は、マッチングイベント以外の催し（そのURLへ申し込む。上部・下部の「申し込む」ボタンの対象にはしない）
 export const events = [
   {
     label: 'NEXT EVENT',
@@ -20,6 +21,22 @@ export const events = [
     ],
     open: true,
     apply: true,
+  },
+  {
+    label: 'TAROT by en＋',
+    date: '2026.12.06',
+    week: 'SUN',
+    lead: '占い師 Loa（ロア）さんによるタロット占い。\n1枠ずつの予約制で、ゆっくりご相談いただけます。',
+    rows: [
+      { icon: '🕛', name: '時間', value: '12:00〜17:00', sub: '予約制（1枠20分）' },
+      { icon: '📍', name: '会場', value: 'ニューサムクック' },
+      { icon: '🔮', name: '占い師', value: 'Loa（ロア）さん' },
+      { icon: '💰', name: '鑑定料', value: '通常鑑定（15分）3,000円\nロング鑑定（30分）5,500円', sub: 'どちらもワンドリンク付き／ロング鑑定は限定2名' },
+    ],
+    open: true,
+    apply: true,
+    formUrl: 'https://script.google.com/macros/s/AKfycbz9ldLbnVkMjPEDdAqxRhXr7VljOktwgAOFF4YbS0QWaOkQmP98JyctNo44lfcAq93G/exec',
+    button: '占いを予約する',
   },
 ]
 

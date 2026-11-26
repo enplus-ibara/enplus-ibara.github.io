@@ -480,3 +480,7 @@ button { font: inherit; color: inherit; }
 }
 
 .ev-note { margin-top: 20px; font-size: 0.9rem; line-height: 1.9; color: var(--navy, #1f2d4d); opacity: 0.85; }
+
+/* 開催情報：補足の一文（占いなど）と、改行を含む値 */
+.ev-lead { margin: -8px 0 24px; font-size: 0.92rem; line-height: 1.9; color: var(--navy); white-space: pre-line; }
+.ev-row dd { white-space: pre-line; }

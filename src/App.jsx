@@ -19,8 +19,10 @@ const ease = [0.22, 1, 0.36, 1]
 
 // スクロールで見えたときに、ぼかしが解けながら浮かび上がる
 // 申込受付中の回があればフォームへ、なければ「次回のイベント」欄へ案内する
-const applyEvent = events.find((e) => e.apply)
-const nextEvent = events[0]
+// マッチングイベントの回だけを対象にする（占いなど formUrl を持つ回は除く）
+const matchEvents = events.filter((e) => !e.formUrl)
+const applyEvent = matchEvents.find((e) => e.apply)
+const nextEvent = matchEvents[0]
 const ApplyLink = ({ className, label, onClick }) =>
   applyEvent
     ? <a className={className} href={FORM_URL} target="_blank" rel="noreferrer">{label}</a>
@@ -383,7 +385,7 @@ function Voices() {
 function EventSection() {
   return (
     <section className="section event" id="event">
-      <SectionTitle en="EVENT" ja="次回のイベント" />
+      <SectionTitle en="EVENT" ja="これからのイベント" />
       <div className="event-list">
         {events.map((ev, i) => (
           <motion.article
@@ -407,6 +409,7 @@ function EventSection() {
             )}
             <p className="ev-label">{ev.label}</p>
             <p className="ev-date">{ev.date}<span>{ev.week}</span></p>
+            {ev.lead && <p className="ev-lead">{ev.lead}</p>}
             <dl>
               {ev.rows.map((r, j) => (
                 <motion.div
@@ -426,7 +429,7 @@ function EventSection() {
               ))}
             </dl>
             {ev.open && (ev.apply
-              ? <a className="btn" href={FORM_URL} target="_blank" rel="noreferrer">この回に申し込む</a>
+              ? <a className="btn" href={ev.formUrl || FORM_URL} target="_blank" rel="noreferrer">{ev.button || 'この回に申し込む'}</a>
               : <p className="ev-note">お申し込みは近日受付開始です。<br />開始のお知らせは Instagram でお届けします。</p>
             )}
           </motion.article>
