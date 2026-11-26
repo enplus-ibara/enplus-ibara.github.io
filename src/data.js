@@ -26,6 +26,7 @@ export const events = [
     label: 'TAROT by en＋',
     date: '2026.12.06',
     week: 'SUN',
+    photo: 'img/samcook_counter.jpg',
     lead: '占い師 Loa（ロア）さんによるタロット占い。\n1枠ずつの予約制で、ゆっくりご相談いただけます。',
     rows: [
       { icon: '🕛', name: '時間', value: '12:00〜17:00', sub: '予約制（1枠20分）' },
